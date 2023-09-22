@@ -1,4 +1,6 @@
+import { getTrending } from "./GetApi";
 export const App = () => {
+  getTrending()
   return (
     <div
       style={{
@@ -14,3 +16,5 @@ export const App = () => {
     </div>
   );
 };
+
+

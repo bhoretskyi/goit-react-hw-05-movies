@@ -9,10 +9,11 @@ const options = {
 };
 export async function getTrending() {
   const resp = await axios.get(
-    'https://api.themoviedb.org/3/trending/all/day?language=en-US',
+    'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
     options
   );
-  return resp;
+
+  return resp.data.results;
 }
 
 export async function searchMovies(query) {

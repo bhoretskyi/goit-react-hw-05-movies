@@ -1,25 +1,25 @@
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 // import { getTrending } from "./GetApi";
-import Header from './Header/Header';
+
 import Home from 'pages/Home/Home';
 import Movies from 'pages/Movies/Movies';
 import NotFound from 'pages/NotFound/NotFpund';
 import MovieDetails from 'pages/MovieDetails/MovieDetails';
+import Layout from './Layout/Layout';
+import Credits from './Credits/Credits';
+import Rewiews from './Rewiews/Rewiews';
 export const App = () => {
   return (
-    <div>
-      {/* <Header/> */}
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:movieId" element={<MovieDetails/>} />
-
+    <Routes>
+      <Route path="/" element={<Layout />}>
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+        <Route index element={<Home />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="movies/:movieId" element={<MovieDetails />}> 
+        <Route path='credits' element ={<Credits/>}/>
+        <Route path ='rewiews' element={<Rewiews/>} />
+        </Route>
+      </Route>
+    </Routes>
   );
 };

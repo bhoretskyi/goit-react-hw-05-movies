@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams,Link, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieDetails } from 'components/GetApi';
 
@@ -45,6 +45,13 @@ const MovieDetails = () => {
           <p>{data.overview}</p>
         </div>
       )}
+      <div>
+        <h3>Additional information</h3>
+       <Link to="credits">Cast</Link>
+        <Link to="rewiews">Rewiews</Link>
+        <Outlet/>
+        </div>
+        
     </div>
   );
 };

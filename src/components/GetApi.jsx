@@ -18,7 +18,7 @@ export async function getTrending() {
 
 export async function searchMovies(query) {
   const resp = await axios.get(
-    `https://api.themoviedb.org/3/search/${query}?include_adult=false&language=en-US&page=1`,
+    `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
     options
   );
   return resp;

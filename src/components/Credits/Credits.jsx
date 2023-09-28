@@ -11,7 +11,6 @@ const Credits = () => {
         try {
           setIsLoading(true)
           const resp = await getMovieCredits(movieId);
-console.log(resp.data.cast)
           setData(resp.data.cast);
         } catch (error) {
           console.error('Error:', error);
@@ -32,8 +31,13 @@ console.log(resp.data.cast)
         ) : data.length > 0 ? (
           <ul>
             {data.map((credit, index) => (
-              <li key={index}><h3>{credit.name}</h3></li>
-            ))}
+              <li key={index}><h3>{credit.name}</h3>
+               <img
+              src={credit.profile_path ? `https://image.tmdb.org/t/p/original/${credit.profile_path}` : '#'}
+              alt={credit.character}
+              width="300"
+            /></li>
+            ))} 
           </ul>
         ) : 
         (<h2>There is no cast information</h2>)}

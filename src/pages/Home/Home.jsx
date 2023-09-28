@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getTrending } from "components/GetApi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const location = useLocation()
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +26,7 @@ const Home = () => {
       
       <ul>
         {data.map((item) => (
-          <Link key={item.id} to={`/movies/${item.id}`}> <li>{item.title}</li></Link>
+          <Link key={item.id} to={`/movies/${item.id}`} state={{from : location}}> <li>{item.title}</li></Link>
         ))}
       </ul>
     </div>

@@ -1,6 +1,6 @@
 // import MovieDetails from "pages/MovieDetails/MovieDetails"
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useSearchParams, useLocation } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { searchMovies } from 'components/GetApi';
 
@@ -10,8 +10,7 @@ const Movies = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const movieId = searchParams.get('movie');
-  const location = useLocation()
-
+  const location = useLocation();
 
   //   const updateQueryString = evt => {}
 
@@ -53,14 +52,21 @@ const Movies = () => {
           </Form>
         )}
       </Formik>
-      <ul>
-        {movie.map(item => (
-          <Link key={item.id} to={`/movies/${item.id}`} state={{from : location}}>
-            
-            <li>{item.title}</li>
-          </Link>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {movie.map(item => (
+            <Link
+              key={item.id}
+              to={`/movies/${item.id}`}
+              state={{ from: location }}
+            >
+              <li>{item.title}</li>
+            </Link>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

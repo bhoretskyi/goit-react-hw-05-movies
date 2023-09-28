@@ -1,13 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-// import { getTrending } from "./GetApi";
+import { lazy } from 'react';
 
-import Home from 'pages/Home/Home';
-import Movies from 'pages/Movies/Movies';
 import NotFound from 'pages/NotFound/NotFpund';
-import MovieDetails from 'pages/MovieDetails/MovieDetails';
 import Layout from './Layout/Layout';
-import Credits from './Credits/Credits';
-import Rewiews from './Rewiews/Rewiews';
+const Home = lazy(() => import('pages/Home/Home'));
+const Movies = lazy(() => import('pages/Movies/Movies'));
+const MovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
+const Credits = lazy(() => import('./Credits/Credits'));
+const Rewiews = lazy(() => import('./Rewiews/Rewiews'));
+
 export const App = () => {
   return (
     <Routes>
@@ -15,9 +16,9 @@ export const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route index element={<Home />} />
         <Route path="movies" element={<Movies />} />
-        <Route path="movies/:movieId" element={<MovieDetails />}> 
-        <Route path='credits' element ={<Credits/>}/>
-        <Route path ='rewiews' element={<Rewiews/>} />
+        <Route path="movies/:movieId" element={<MovieDetails />}>
+          <Route path="credits" element={<Credits />} />
+          <Route path="rewiews" element={<Rewiews />} />
         </Route>
       </Route>
     </Routes>

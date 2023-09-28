@@ -1,41 +1,39 @@
-import { useParams,Link, Outlet, useLocation } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { getMovieDetails } from 'components/GetApi';
+import { StyledLink, StyledDiv } from './StyledMovieDetails';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  const location = useLocation()
+  const location = useLocation();
   const backLinkLocationRef = useRef(location.state?.from ?? '/home');
-  
 
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         const resp = await getMovieDetails(movieId);
 
         setData(resp.data);
       } catch (error) {
         console.error('Error:', error);
-      } 
-      finally{
-        setIsLoading(false)
+      } finally {
+        setIsLoading(false);
       }
     };
 
-
     fetchData();
   }, [movieId]);
-  
+
   return (
     <div>
       {isLoading ? (
         <p>Loading...</p>
-      ):(
+      ) : (
         <div>
-        <Link to={backLinkLocationRef.current}>back</Link>
+          <StyledLink to={backLinkLocationRef.current}>back</StyledLink>
 
           <h1>{data.title}</h1>
           <h2>User score: {Math.round(data.vote_average * 10)}%</h2>
@@ -49,14 +47,12 @@ const MovieDetails = () => {
           <p>{data.overview}</p>
         </div>
       )}
-      <div>
-        
+      <StyledDiv>
         <h3>Additional information</h3>
-       <Link to="credits">Cast</Link>
-        <Link to="rewiews">Rewiews</Link>
-        <Outlet/>
-        </div>
-        
+        <StyledLink to="credits">Cast</StyledLink>
+        <StyledLink to="rewiews">Rewiews</StyledLink>
+        <Outlet />
+      </StyledDiv>
     </div>
   );
 };

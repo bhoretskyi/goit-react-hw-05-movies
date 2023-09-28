@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { getTrending } from "components/GetApi";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { getTrending } from 'components/GetApi';
+import { Link, useLocation } from 'react-router-dom';
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const location = useLocation()
-  
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const resp = await getTrending();
 
-        setData(resp); 
+        setData(resp);
       } catch (error) {
-        console.error("Error:", error);
+        console.error('Error:', error);
       }
     };
 
@@ -23,10 +22,16 @@ const Home = () => {
 
   return (
     <div>
-      
       <ul>
-        {data.map((item) => (
-          <Link key={item.id} to={`/movies/${item.id}`} state={{from : location}}> <li>{item.title}</li></Link>
+        {data.map(item => (
+          <Link
+            key={item.id}
+            to={`/movies/${item.id}`}
+            state={{ from: location }}
+          >
+            {' '}
+            <li>{item.title}</li>
+          </Link>
         ))}
       </ul>
     </div>
